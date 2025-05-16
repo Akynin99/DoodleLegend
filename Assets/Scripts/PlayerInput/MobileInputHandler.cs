@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
+using TouchPhase = UnityEngine.TouchPhase;
 
 namespace DoodleLegend.PlayerInput
 {
@@ -9,7 +11,15 @@ namespace DoodleLegend.PlayerInput
     
         public float GetHorizontal() 
         {
-            return Mathf.Clamp(Input.acceleration.x * _horizontalSensitivity, -1f, 1f);
+            if (Accelerometer.current != null)
+            {
+                InputSystem.EnableDevice(Accelerometer.current);
+            }
+            
+            if (Accelerometer.current == null) return 0f;
+        
+            Vector3 acceleration = Accelerometer.current.acceleration.ReadValue();
+            return acceleration.x;
         }
 
         public bool IsJumpPressed() 
