@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace DoodleLegend.PlayerInput
 {
@@ -6,10 +7,18 @@ namespace DoodleLegend.PlayerInput
     {
         private const string HorizontalAxis = "Horizontal";
     
-        public float GetHorizontal() => Input.GetAxis(HorizontalAxis);
+        public float GetHorizontal()
+        {
+            if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
+                return -1;
+            if (Keyboard.current.dKey.isPressed || Keyboard.current.rightArrowKey.isPressed)
+                return 1;
+            
+            return 0;
+        }
+
+        public bool IsJumpPressed() => Keyboard.current.spaceKey.isPressed;
     
-        public bool IsJumpPressed() => Input.GetKeyDown(KeyCode.Space);
-    
-        public bool IsPowerUpActivated() => Input.GetKeyDown(KeyCode.E);
+        public bool IsPowerUpActivated() => Keyboard.current.eKey.isPressed;
     }
 }
