@@ -186,7 +186,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dodole_back_0: 7332714484951043004
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
